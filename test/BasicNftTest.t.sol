@@ -10,6 +10,10 @@ contract BasicNftTest is Test {
     BasicNft public basicNft;
     DeployBasicNft public deployer;
 
+    address public user = makeAddr("user");
+    string public constant TOKENURI =
+        "ipfs://bafybeig37ioir76s7mg5oobetncojcm3c3hxasyd4rvid4jqhy4gkaheg4/?filename=0-PUG.json";
+
     // Setup of test
     function setUp() public {
         //Deployed contract
@@ -29,6 +33,32 @@ contract BasicNftTest is Test {
         assert(
             keccak256(abi.encodePacked(actualName)) ==
                 keccak256(abi.encodePacked(expectedName))
+        );
+    }
+
+    function testCanMintAndBalance() public {
+        address account1 = makeAddr("Ram");
+        address account2 = makeAddr("shayam");
+
+        //minting token for account
+        vm.prank(account1);
+        basicNft.mintNFT(TOKENURI);
+
+        vm.prank(account2);
+        basicNft.mintNFT(TOKENURI);
+
+        assert(basicNft.balanceOf(account1) == 1);
+        assert(basicNft.balanceOf(account2) == 1);
+    }
+
+    function testCanMintAndHaveABalance() public {
+        vm.prank(user);
+        basicNft.mintNFT(TOKENURI);
+
+        assert(basicNft.balanceOf(user) == 1);
+        assert(
+            keccak256(abi.encodePacked(TOKENURI)) ==
+                keccak256(abi.encodePacked(basicNft.tokenURI(0)))
         );
     }
 }
