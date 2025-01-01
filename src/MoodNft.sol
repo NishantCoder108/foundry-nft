@@ -5,6 +5,8 @@ pragma solidity ^0.8.28;
 import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import {console} from "forge-std/console.sol";
+
 contract MoodNft is ERC721 {
     // error
     error MoodNFT_CantFlipMoodIfNotOwner();
@@ -43,6 +45,10 @@ contract MoodNft is ERC721 {
         // Check if the token exists
         address owner = ownerOf(tokenId);
         require(owner != address(0), "Token does not exist");
+
+        console.log("owner: %s", owner);
+        console.log("msg.sender: %s", msg.sender);
+        console.log("getApproved(tokenId): %s", getApproved(tokenId));
 
         // Check if the caller is the owner or approved
         require(
