@@ -30,10 +30,7 @@ contract BasicNftTest is Test {
         //abi.encodePacked will convert to bytes
         //keccak256 will hash the bytes into bytes32
 
-        assert(
-            keccak256(abi.encodePacked(actualName)) ==
-                keccak256(abi.encodePacked(expectedName))
-        );
+        assert(keccak256(abi.encodePacked(actualName)) == keccak256(abi.encodePacked(expectedName)));
     }
 
     function testCanMintAndBalance() public {
@@ -56,9 +53,6 @@ contract BasicNftTest is Test {
         basicNft.mintNFT(TOKENURI);
 
         assert(basicNft.balanceOf(user) == 1);
-        assert(
-            keccak256(abi.encodePacked(TOKENURI)) ==
-                keccak256(abi.encodePacked(basicNft.tokenURI(0)))
-        );
+        assert(keccak256(abi.encodePacked(TOKENURI)) == keccak256(abi.encodePacked(basicNft.tokenURI(0))));
     }
 }
