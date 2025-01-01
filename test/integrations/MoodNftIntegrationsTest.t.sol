@@ -29,6 +29,22 @@ contract MoodNftTest is Test {
 
         // forge test --mt testViewTokenURIIntegration
     }
+
+    function testFlipMoodIntegration() public {
+        //when we write `vm.prank` only next tab will be selected as a user
+        vm.prank(USER);
+        moodNft.mintNFT();
+
+        vm.prank(USER);
+        moodNft.flipMood(0);
+
+        assert(
+            keccak256(abi.encodePacked(moodNft.tokenURI(0))) ==
+                keccak256(abi.encodePacked(SAD_SVG_URI))
+        );
+
+        // forge test --mt testFlipMoodIntegration
+    }
     function testViewTokenURI() public {
         vm.prank(USER);
         moodNft.mintNFT(); //mint a nft
