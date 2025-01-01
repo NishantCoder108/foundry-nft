@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.28;
 
-import {Test, console} from "forge-std/Test.sol";
+import "forge-std/Test.sol";
 import {MoodNft} from "../src/MoodNft.sol";
 
 contract MoodNftTest is Test {
@@ -28,5 +28,20 @@ contract MoodNftTest is Test {
         Test command : 
         forge test --mt testViewTokenURI -vvvv
         */
+    }
+
+    function testFlipMood() public {
+        //startprank is used to set the owner continuously
+        vm.startPrank(USER);
+        moodNft.mintNFT();
+
+        string memory initial_token_uri = moodNft.tokenURI(0);
+        console.log(initial_token_uri);
+
+        moodNft.flipMood(0);
+        string memory flip_token_uri = moodNft.tokenURI(0);
+
+        console.log(flip_token_uri);
+        vm.assertNotEq(initial_token_uri, flip_token_uri);
     }
 }
