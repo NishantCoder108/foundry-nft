@@ -35,6 +35,8 @@ contract MoodNft is ERC721 {
     }
 
     function mintNFT() public returns (uint256) {
+        console.log("Mood.Happy :  %s", uint(Mood.HAPPY));
+
         _safeMint(msg.sender, s_tokenCounter);
         s_tokenIdToMood[s_tokenCounter] = Mood.HAPPY;
 
@@ -85,9 +87,9 @@ contract MoodNft is ERC721 {
                     Base64.encode( //convert to base64
                             bytes(
                                 abi.encodePacked( //convert to bytes
-                                        '{"name: "',
+                                        '{"name": "',
                                         name(),
-                                        '", description: "An NFT that reflects your mood!", "attributes": [{"trait_type": "Mood", "value": 100}], "image": ',
+                                        '", "description": "An NFT that reflects your mood!", "attributes": [{"trait_type": "Mood", "value": 100}], "image": "',
                                         imageURI,
                                         '"}'
                                     )
