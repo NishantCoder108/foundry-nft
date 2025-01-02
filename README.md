@@ -32,7 +32,23 @@ aDozOyIKICAgIC8+Cjwvc3ZnPg==
 
 
 ```
+#### Command :
+```
+base64 -i imgName.svg
+```
 
+#### Interact with Blockchain :
+```bash
+# Mint Nft
+cast send 0x_CONTRACT_ADDRESS_32d93F642f64180aa3 "mintNFT()" --private-key your_private_key_bed5efcae784d7bf4f2ff80  --rpc-url http://localhost:8545
+
+# FlipMood Nft
+cast send 0x_CONTRACT_ADDRESS_32d93F642f64180aa3 "flipMood(uint256)" 1 --private-key your_private_key_bed5efcae784d7bf4f2ff80 --rpc-url http://localhost:8545
+
+
+# Getting:
+cast call 0x_CONTRACT_ADDRESS_32d93F642f64180aa3 "tokenURI(uint256)" 0
+```
 ---
 ## Foundry
 
